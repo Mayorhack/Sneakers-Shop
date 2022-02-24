@@ -509,6 +509,12 @@ section {
     width: auto;
     height: 70%;
   }
+  .main-nav .cart-group .showcart {
+    left:-15rem;
+    transform:translate(-50%);
+    width:30rem;
+    height:50rem;
+  }
   .container {
     max-width: 70rem;
   }
