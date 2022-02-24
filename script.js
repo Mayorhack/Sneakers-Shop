@@ -27,7 +27,7 @@ document.querySelectorAll(".buy>a:first-child").forEach((item) => {
   item.addEventListener("click", function (e) {
     const image = this.parentNode.nextElementSibling;
     // big bug down here, try fix it
-    const imageElement = `${image.src}`.slice(22);
+    const imageElement = `${image.src}`;
     console.log(imageElement);
 
     const details = image.parentNode.nextElementSibling.children[0].textContent;
