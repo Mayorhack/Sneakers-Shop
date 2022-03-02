@@ -6,20 +6,36 @@ document.querySelector(".close").addEventListener("click", function () {
   document.querySelector(".showcart").classList.add("hidden");
 });
 // Ratings
-document.querySelectorAll(".rating>i").forEach((star) =>
-  star.addEventListener("click", function () {
-    let prev = this.previousElementSibling;
-    if (!this.classList.contains("fas")) {
-      while (prev) {
-        // if ()
-        prev.classList.toggle("fas");
-        prev = prev.previousElementSibling;
-        continue;
-      }
-    }
-    this.classList.toggle("fas");
-  })
-);
+
+const rateShopping = function (star, i, allStars) {
+  if (i === 0) {
+    if (this.classList.contains("fas"))
+      return allStars
+        .slice(i)
+        .map((innerStar) => innerStar.classList.remove("fas"));
+    this.classList.add("fas");
+    // return ;
+  }
+  if (i > 0) {
+    if (this.classList.contains("fas"))
+      return allStars
+        .slice(i)
+        .map((innerStar) => innerStar.classList.remove("fas"));
+    allStars
+      .slice(0)
+      .splice(0, i + 1)
+      .map((innerStar) => innerStar.classList.add("fas"));
+  }
+};
+
+// NEsting forEach inside forEach is a bad practise though; we would look for a better solution in the future
+document.querySelectorAll(".rating").forEach((rating) => {
+  Array.from(rating.querySelectorAll(".fa-star")).forEach((star, i, allStars) =>
+    star.addEventListener("click", function () {
+      rateShopping.call(this, star, i, allStars);
+    })
+  );
+});
 // Adding cart
 const shoppingItems = document.querySelector(".items>ul");
 
@@ -45,7 +61,7 @@ document.querySelectorAll(".buy>a:first-child").forEach((item) => {
     // shoppingItems.textContent;
   });
 });
-console.log(document.querySelector(".delete"));
-document.querySelector(".delete").addEventListener("click", function () {
-  this.parentNode.classList.add("hidden");
-});
+// console.log(document.querySelector(".delete"));
+// document.querySelector(".delete").addEventListener("click", function () {
+//   this.parentNode.classList.add("hidden");
+// });
